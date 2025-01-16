@@ -14,7 +14,9 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 
-const allowedOrigins = [// Production URL
+const allowedOrigins = [
+  // Production URL
+  "https://chatapp-frontend-two-kappa.vercel.app", // production URL
   "http://localhost:5173", // Local development URL
 ];
 

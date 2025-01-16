@@ -14,13 +14,18 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 
-app.use(
-  cors({
-    origin: "https://chatapp-frontend-two-kappa.vercel.app", // Replace with your frontend URL
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-    credentials: true, // Allow cookies if needed
-  })
-);
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || "http://localhost:3000",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
+app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+  console.log("Request Origin:", req.headers.origin);
+  next();
+});
+
 app.use(express.json());
 app.use(cookieParser());
 app.get("/", (req, res) => {

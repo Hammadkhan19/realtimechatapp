@@ -14,27 +14,13 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 
-const allowedOrigins = [
-  // Production URL
-  "https://chatapp-frontend-two-kappa.vercel.app", // production URL
-  "http://localhost:5173", // Local development URL
-];
-
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // Always allow the origin if credentials are involved
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true); // Accept the origin
-      }
-      return callback(new Error("Not allowed by CORS")); // Reject the origin
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // Allow cookies and authentication headers
-    preflightContinue: false, // Stop preflight requests from being processed by this middleware
+    origin: "https://chatapp-frontend-two-kappa.vercel.app", // Replace with your frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    credentials: true, // Allow cookies if needed
   })
 );
-
 app.use(express.json());
 app.use(cookieParser());
 app.get("/", (req, res) => {
